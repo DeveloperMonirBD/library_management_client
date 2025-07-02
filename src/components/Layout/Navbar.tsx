@@ -15,12 +15,12 @@ export default function Navbar() {
         <nav className="w-full border-b bg-background px-5">
             <div className="max-w-7xl mx-auto h-16 flex items-center justify-between">
                 {/* Logo */}
-                <div className="flex items-center">
+                <Link to="/" className="flex items-center">
                     <img src={logo} alt="Logo" className="h-8 w-auto" />
                     <div className="hidden md:flex items-center">
                         <span className="ml-2 font-bold text-lg">Library</span>Management
                     </div>
-                </div>
+                </Link>
 
                 {/* Toggle button for mobile */}
                 <button className="md:hidden ml-3" onClick={() => setMobileMenuOpen(prev => !prev)} aria-label="Toggle Mobile Menu">
