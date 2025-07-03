@@ -58,13 +58,13 @@ export default function AllBooksTable() {
 
     return (
         <div className="p-4 overflow-x-auto w-full">
-            <table className="min-w-full table-auto border border-gray-300 text-sm">
+            <table className="min-w-full table-auto border border-gray-300 text-sm sm:text-base">
                 <thead className="sticky top-0 bg-gray-100 dark:bg-gray-800 z-10">
                     <tr>
                         <th className="px-2 py-2">Title</th>
                         <th className="px-2 py-2">Author</th>
                         <th className="px-2 py-2">Genre</th>
-                        <th className="px-2 py-2">ISBN</th>
+                        <th className="px-2 py-2 hidden sm:table-cell">ISBN</th>
                         <th className="px-2 py-2">Copies</th>
                         <th className="px-2 py-2">Availability</th>
                         <th className="px-2 py-2">Actions</th>
@@ -78,12 +78,12 @@ export default function AllBooksTable() {
                                 <td className="px-2 py-2">{book.title}</td>
                                 <td className="px-2 py-2">{book.author}</td>
                                 <td className="px-2 py-2">{book.genre}</td>
-                                <td className="px-2 py-2">{book.isbn}</td>
+                                <td className="px-2 py-2 hidden sm:table-cell">{book.isbn}</td>
                                 <td className="px-2 py-2">{book.copies}</td>
                                 <td className="px-2 py-2">
-                                    <span className={`px-2 py-1 rounded ${isAvailable ? 'bg-green-200 text-green-700' : 'bg-red-200 text-red-700'}`}>{isAvailable ? 'Available' : 'Unavailable'}</span>
+                                    <span className={`px-2 py-1 rounded text-sm ${isAvailable ? 'bg-green-200 text-green-700' : 'bg-red-200 text-red-700'}`}>{isAvailable ? 'Available' : 'Unavailable'}</span>
                                 </td>
-                                <td className="px-4 py-2 space-x-2">
+                                <td className="px-4 py-2 space-x-2 space-y-2 md:space-y-0">
                                     <Button variant="outline" size="sm" onClick={() => handleEdit(book)}>
                                         <Pencil className="h-4 w-4 mr-1" />
                                         Edit
