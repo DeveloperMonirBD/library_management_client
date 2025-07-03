@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useNavigate } from 'react-router';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { toast } from 'sonner';
 
 export default function AddBook() {
     const navigate = useNavigate();
@@ -33,8 +34,10 @@ export default function AddBook() {
         e.preventDefault();
         try {
             await createBook(formData).unwrap();
+            toast.success('📘 Book added successfully!');
             navigate('/all-books');
         } catch (error) {
+            toast.error('❌ Failed to create book. Please try again.');
             console.error('Failed to create book:', error);
         }
     };

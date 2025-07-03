@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 
 interface Props {
     bookId: string;
@@ -22,7 +23,7 @@ export default function BorrowBookForm({ bookId, availableCopies, isOpen, onClos
         e.preventDefault();
 
         if (quantity > availableCopies) {
-            console.error(`Requested quantity (${quantity}) exceeds available copies (${availableCopies})`);
+            toast.error(`Only ${availableCopies} copies available`);
             return;
         }
 
@@ -33,10 +34,12 @@ export default function BorrowBookForm({ bookId, availableCopies, isOpen, onClos
 
         try {
             await borrowBook({ bookId, borrowerData }).unwrap();
+            toast.success('📚 Book borrowed successfully!');
             onClose();
             navigate('/borrow-summary');
-        } catch (err: any) {
-            console.error('Borrowing failed:', err?.data?.message || err?.message);
+        } catch (error) {
+            toast.error('❌ Borrowing failed.');
+            console.error('Borrowing failed:', error);
         }
     };
 

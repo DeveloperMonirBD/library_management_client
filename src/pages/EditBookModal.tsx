@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { useState, useEffect } from 'react';
 import type { IBook } from '@/types';
 import { useUpdateBookMutation } from '@/redux/api/baseApi';
+import { toast } from 'sonner'; 
 
 interface Props {
     book: IBook;
@@ -24,7 +25,7 @@ export default function EditBookModal({ book, isOpen, onClose }: Props) {
         setFormData(book); // Update form state if props change
     }, [book]);
 
-    const handleChange = (field: keyof IBook, value: any) => {
+    const handleChange = (field: keyof IBook, value: string | number | boolean) => {
         setFormData(prev => ({ ...prev, [field]: value }));
     };
 
@@ -38,8 +39,10 @@ export default function EditBookModal({ book, isOpen, onClose }: Props) {
 
         try {
             await updateBook({ id: book._id, updatedBook }).unwrap();
+            toast.success('📘 Book updated successfully!');
             onClose(); // ✅ Close modal after successful update
         } catch (error) {
+            toast.error('❌ Failed to update book.');
             console.error('Book update failed:', error);
         }
     };

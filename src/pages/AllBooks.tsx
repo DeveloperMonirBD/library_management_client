@@ -1,13 +1,11 @@
-import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 import { useDeleteBookMutation, useGetBooksQuery } from '@/redux/api/baseApi';
 import type { IBook } from '@/types';
-import { Button } from '@/components/ui/button';
-import { Pencil, Trash2, BookOpen } from 'lucide-react';
-import EditBookModal from './EditBookModal';
+import { BookOpen, Pencil, Trash2 } from 'lucide-react';
+import { useState } from 'react';
 import BorrowBookForm from './BorrowBookForm';
-
-
-
+import EditBookModal from './EditBookModal';
+import { toast } from 'sonner';
 
 export default function AllBooksTable() {
     const { data, isLoading, isError } = useGetBooksQuery(undefined, {
@@ -16,10 +14,9 @@ export default function AllBooksTable() {
         refetchOnReconnect: true
     });
 
-    const [handleDelete] = useDeleteBookMutation();
+    const [deleteBook] = useDeleteBookMutation();
     const [selectedBook, setSelectedBook] = useState<IBook | null>(null);
     const [borrowId, setBorrowId] = useState<string | null>(null);
-
     const [availableCopies, setAvailableCopies] = useState<number>(0);
 
     const handleEdit = (book: IBook) => setSelectedBook(book);
@@ -33,6 +30,28 @@ export default function AllBooksTable() {
         setBorrowId(null);
         setAvailableCopies(0);
     };
+
+    const handleDelete = async (id: string) => {
+        toast('Are you sure you want to delete this book?', {
+            action: {
+                label: 'Yes, delete it',
+                onClick: async () => {
+                    try {
+                        await deleteBook(id).unwrap();
+                        toast.success('🗑️ Book deleted successfully');
+                    } catch (error) {
+                        toast.error('❌ Failed to delete book.');
+                        console.error('Delete book failed:', error);
+                    }
+                }
+            },
+            cancel: {
+                label: "Cancel",
+                onClick: () => {}
+            }
+        })
+        
+    }
 
     if (isLoading) return <div>Loading...</div>;
     if (isError) return <div>Error loading books.</div>;
