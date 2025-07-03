@@ -1,69 +1,92 @@
-# React + TypeScript + Vite
+# 📚 Minimal Library Management System – Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a clean and responsive frontend application built using **React**, **TypeScript**, **RTK Query**, and **Tailwind CSS**. It allows users to manage library books and borrowing operations without
+authentication. All features interact with a RESTful backend.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Live Demo
 
-## Expanding the ESLint configuration
+🔗 [Visit Live Site](https://your-frontend-deployment-url.com)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+| Layer       | Technology                                     |
+| ----------- | ---------------------------------------------- |
+| Frontend    | React + TypeScript                             |
+| State Mgmt  | Redux Toolkit + RTK Query                      |
+| Styling     | Tailwind CSS / ShadCN UI                       |
+| API Backend | Node.js + Express.js (connected via RTK Query) |
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## ✨ Features
+
+### 📕 Book Management
+
+-   View all books in a responsive table
+-   Add new book with form and validation
+-   Edit book details with live update
+-   Delete book with confirmation dialog
+-   Book status dynamically reflects availability based on copies
+
+### 📘 Borrow Management
+
+-   Borrow form accepts quantity and due date
+-   Quantity is validated against available copies
+-   If copies reach 0, availability updates automatically
+-   Instant redirect to borrow summary
+
+### 📊 Borrow Summary Page
+
+-   Aggregated summary of borrowed books
+-   Displays total quantity borrowed per book
+
+### 🍞 Toast Notifications
+
+-   Success & Error feedback via Sonner (shadcn compatible)
+
+### ⚡ Optimistic UI Updates
+
+-   Instant frontend changes with backend rollback protection
+
+---
+
+## 📁 Folder Structure
+
+client/ ├── src/ │ ├── components/ # Reusable UI components │ ├── pages/ # Page views (Books, Create, Summary) │ ├── routes/ # Route configuration │ ├── redux/ │ │ ├── store.ts # Redux store setup │ │ └── api/ # RTK Query endpoints │ ├── types/ # TypeScript interfaces │ └── assets/ # Logos, icons, etc.
+
+
+---
+
+## 📦 Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/DeveloperMonirBD/library_management_client.git
+cd library_management_client
+
+# Install dependencies
+npm install
+
+# Run in development mode
+npm run dev 
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🔐 API Endpoints (Frontend Consumption)
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| Endpoint     | Description                                    |
+| ------------ | ------------- |
+| /books | Get all books |
+| /books/:id | View single book |
+| /create-book | Add new book |
+| /edit-book/:id | Update book details |
+| /borrow/:bookId | Borrow a book |
+| /borrow-summary | View aggregated borrow data |
+
+## 👨‍💻 Developer
+Md. Monirul Islam 🌐 Portfolio: (https://monirulislam05.vercel.app/) 📧 Email: (mrmonir0558@gmail.com)
