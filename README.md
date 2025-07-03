@@ -55,9 +55,9 @@ authentication. All features interact with a RESTful backend.
 ---
 
 ## 📁 Folder Structure
-
+```
 client/ ├── src/ │ ├── components/ # Reusable UI components │ ├── pages/ # Page views (Books, Create, Summary) │ ├── routes/ # Route configuration │ ├── redux/ │ │ ├── store.ts # Redux store setup │ │ └── api/ # RTK Query endpoints │ ├── types/ # TypeScript interfaces │ └── assets/ # Logos, icons, etc.
-
+```
 
 ---
 
@@ -89,4 +89,4 @@ npm run dev
 | /borrow-summary | View aggregated borrow data |
 
 ## 👨‍💻 Developer
-Md. Monirul Islam 🌐 Portfolio: (https://monirulislam05.vercel.app/) 📧 Email: (mrmonir0558@gmail.com)
+Md. Monirul Islam  📧 Email: [mrmonir0558@gmail.com]
