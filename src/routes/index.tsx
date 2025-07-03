@@ -2,32 +2,31 @@ import App from "@/App";
 import AddBook from "@/pages/AddBook";
 import AllBooks from "@/pages/AllBooks";
 import BorrowSummary from "@/pages/BorrowSummary";
-import Home from "@/pages/Home";
 import { createBrowserRouter } from "react-router";
 
 const router = createBrowserRouter([
     {
-        path: "/",
+        path: '/',
         element: <App />,
         children: [
             {
                 index: true,
-                Component: Home
-            },
-            {
-                path: "/all-books",
                 Component: AllBooks
             },
             {
-                path: "/add-book",
+                path: '/all-books',
+                Component: AllBooks
+            },
+            {
+                path: '/add-book',
                 Component: AddBook
             },
             {
-                path: "/borrow-summary",
+                path: '/borrow-summary',
                 Component: BorrowSummary
             }
         ]
     }
-])
+]);
 
 export default router;

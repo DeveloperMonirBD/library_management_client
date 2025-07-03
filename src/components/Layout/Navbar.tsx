@@ -32,10 +32,10 @@ export default function Navbar() {
                     {/* Desktop Nav */}
                     <NavigationMenu>
                         <NavigationMenuList className="hidden md:flex gap-4 text-sm font-medium">
-                            {['/', '/all-books', '/add-book', '/borrow-summary'].map((path, i) => (
+                            {['/', '/add-book', '/borrow-summary'].map((path, i) => (
                                 <NavigationMenuItem key={path}>
                                     <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                                        <Link to={path}>{['Home', 'All Books', 'Add Books', 'Borrow Summary'][i]}</Link>
+                                        <Link to={path}>{['All Books', 'Add Books', 'Borrow Summary'][i]}</Link>
                                     </NavigationMenuLink>
                                 </NavigationMenuItem>
                             ))}
@@ -52,9 +52,6 @@ export default function Navbar() {
             {/* Mobile Menu Content */}
             {mobileMenuOpen && (
                 <div className="md:hidden flex flex-col gap-3 py-3 text-sm font-medium">
-                    <Link to="/" onClick={() => setMobileMenuOpen(false)}>
-                        Home
-                    </Link>
                     <Link to="/all-books" onClick={() => setMobileMenuOpen(false)}>
                         All Books
                     </Link>

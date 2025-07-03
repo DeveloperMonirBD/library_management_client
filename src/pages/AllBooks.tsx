@@ -1,33 +1,63 @@
-import { useGetBooksQuery } from "@/redux/api/baseApi"
-import type { IBook } from "@/types";
+import { useGetBooksQuery } from '@/redux/api/baseApi';
+import type { IBook } from '@/types';
+import { Button } from '@/components/ui/button'; // shadcn/ui button component
+import { Pencil, Trash2, BookOpen } from 'lucide-react'; // optional icons
 
-export default function AllBooks() {
+export default function AllBooksTable() {
+    const { data, isLoading, isError } = useGetBooksQuery(undefined);
 
-  const { data, isLoading, isError } = useGetBooksQuery(undefined);
+    if (isLoading) return <div>Loading...</div>;
+    if (isError) return <div>Error loading books.</div>;
 
-  // Check if data is still loading
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+    return (
+        <div className="p-4 overflow-x-auto w-full">
+            <table className="min-w-full table-auto border border-gray-300 text-sm">
+                <thead className="sticky top-0 bg-gray-100 dark:bg-gray-800 z-10">
+                    <tr>
+                        <th className="px-2 py-2 md:px-4 md:py-2 text-xs md:text-sm">Title</th>
+                        <th className="px-2 py-2 md:px-4 md:py-2 text-xs md:text-sm">Author</th>
+                        <th className="px-2 py-2 md:px-4 md:py-2 text-xs md:text-sm">Genre</th>
+                        <th className="px-2 py-2 md:px-4 md:py-2 text-xs md:text-sm">ISBN</th>
+                        <th className="px-2 py-2 md:px-4 md:py-2 text-xs md:text-sm">Copies</th>
+                        <th className="px-2 py-2 md:px-4 md:py-2 text-xs md:text-sm">Availability</th>
+                        <th className="px-2 py-2 md:px-4 md:py-2 text-xs md:text-sm">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {data.data.map((book: IBook) => {
+                        const isAvailable = book.copies > 0;
 
-  // Handle error state
-  if (isError) {
-    return <div>Error loading books.</div>;
-  }
-  
-  // console.log({ data, isLoading, isError });
-  
-  return (
-      <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-          {!isLoading &&
-              data.data.map((book: IBook) => (
-                  <div key={book._id} className="border p-4 mb-4 rounded shadow">
-                      <h2 className="text-xl font-bold dark:text-gray-200">{book.title}</h2>
-                      <p className="text-gray-700 dark:text-gray-400">Author: {book.author}</p>
-                      <p className="text-gray-600 dark:text-gray-400">Published: {book.createdAt}</p>
-                      <p className="text-gray-500 dark:text-gray-400">ISBN: {book.isbn}</p>
-                  </div>
-              ))}
-      </div>
-  );
+                        return (
+                            <tr key={book._id} className="border-b dark:border-gray-700">
+                                <td className="px-2 py-2 text-xs md:text-sm">{book.title}</td>
+                                <td className="px-2 py-2 text-xs md:text-sm">{book.author}</td>
+                                <td className="px-2 py-2 text-xs md:text-sm">{book.genre}</td>
+                                <td className="px-2 py-2 text-xs md:text-sm">{book.isbn}</td>
+                                <td className="px-2 py-2 text-xs md:text-sm">{book.copies}</td>
+                                <td className="px-2 py-2 text-xs md:text-sm">
+                                    <span className={`px-2 py-1 text-sm rounded ${isAvailable ? 'bg-green-200 text-green-700' : 'bg-red-200 text-red-700'}`}>
+                                        {isAvailable ? 'Available' : 'Unavailable'}
+                                    </span>
+                                </td>
+                                <td className="px-4 py-2 space-x-2 space-y-2 md:space-y-1">
+                                    <Button variant="outline" size="sm" onClick={() => handleEdit(book)}>
+                                        <Pencil className="h-4 w-4 mr-1" />
+                                        Edit
+                                    </Button>
+                                    <Button variant="destructive" size="sm" onClick={() => handleDelete(book._id)}>
+                                        <Trash2 className="h-4 w-4 mr-1" />
+                                        Delete
+                                    </Button>
+                                    <Button variant="default" size="sm" onClick={() => handleBorrow(book._id)}>
+                                        <BookOpen className="h-4 w-4 mr-1" />
+                                        Borrow
+                                    </Button>
+                                </td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+        </div>
+    );
 }
