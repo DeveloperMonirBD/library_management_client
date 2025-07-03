@@ -91,12 +91,12 @@ npm run dev
 ## Submission:
 
 ### Frontend:
-[GitHub Repository Link:](https://github.com/DeveloperMonirBD/library_management_client)
-[Live Deployment Link:](https://library-management-client-psi.vercel.app)
+[GitHub Repository Link](https://github.com/DeveloperMonirBD/library_management_client) and
+[Live Deployment Link](https://library-management-client-psi.vercel.app)
 
 ### Backend:
-[GitHub Repository Link:](https://github.com/DeveloperMonirBD/library_management_api)
-[Live Deployment Link:](https://library-management-api-a4.vercel.app)
+[GitHub Repository Link](https://github.com/DeveloperMonirBD/library_management_api) and
+[Live Deployment Link](https://library-management-api-a4.vercel.app)
 
 
 ## 👨‍💻 Developer
