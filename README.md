@@ -7,7 +7,7 @@ authentication. All features interact with a RESTful backend.
 
 ## 🚀 Live Demo
 
-🔗 [Visit Live Site](https://your-frontend-deployment-url.com)
+🔗 [Visit Live Site](https://library-management-client-psi.vercel.app)
 
 ---
 
@@ -88,5 +88,16 @@ npm run dev
 | /borrow/:bookId | Borrow a book |
 | /borrow-summary | View aggregated borrow data |
 
+## Submission:
+
+### Frontend:
+[GitHub Repository Link:](https://github.com/DeveloperMonirBD/library_management_client)
+[Live Deployment Link:](https://library-management-client-psi.vercel.app)
+
+### Backend:
+[GitHub Repository Link:](https://github.com/DeveloperMonirBD/library_management_api)
+[Live Deployment Link:](https://library-management-api-a4.vercel.app)
+
+
 ## 👨‍💻 Developer
-Md. Monirul Islam  📧 Email: [mrmonir0558@gmail.com]
+Md. Monirul Islam
